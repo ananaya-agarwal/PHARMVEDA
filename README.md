@@ -10,8 +10,10 @@ This project is a Healthcare Chatbot designed to assist users by analyzing their
   - **Ayurvedic medicines or formulations** derived from trusted Ayurvedic books and databases.
 - Focuses on a natural and preventive healthcare approach.
 
+
 ## 🎨 Frontend
-A user-friendly **frontend chatbot interface** is developed using **JavaScript** to allow users to easily interact with the chatbot and receive the Ayurvedic medicine suggestions.
+
+A user-friendly **chatbot interface** developed with **JavaScript** enables smooth interaction, allowing users to effortlessly receive Ayurvedic recommendations.
 
 ## 🎯 Use Case
 This chatbot reduces waiting time for doctors by offering instant suggestions for common ailments and provides quick access to initial remedies based on Ayurveda.
