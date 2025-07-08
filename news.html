@@ -4,25 +4,189 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pharmveda Chatbot</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #e0f7e9, #c4e5f3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-wrapper {
+      width: 100%;
+      max-width: 450px;
+      height: 85vh;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      background: #2e8b57;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .chat-logo {
+      height: 40px;
+      margin-right: 12px;
+    }
+
+    .chat-window {
+      flex-grow: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .message {
+      padding: 12px 18px;
+      border-radius: 20px;
+      max-width: 75%;
+      word-wrap: break-word;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .message.user {
+      background-color: #d1f0d1;
+      align-self: flex-end;
+    }
+
+    .message.bot {
+      background-color: #e3e3e3;
+      align-self: flex-start;
+    }
+
+    .chat-input-area {
+      display: flex;
+      border-top: 1px solid #ddd;
+      background-color: #f4f4f4;
+      padding: 12px;
+    }
+
+    #chat-input {
+      flex-grow: 1;
+      padding: 12px 16px;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    #chat-input:focus {
+      border-color: #2e8b57;
+    }
+
+    #send-btn {
+      background-color: #2e8b57;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin-left: 10px;
+      border-radius: 30px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #send-btn:hover {
+      background-color: #256c45;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #bbb;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 500px) {
+      .chat-wrapper {
+        height: 95vh;
+        border-radius: 0;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="chat-wrapper">
     <div class="chat-header">
       <img src="Medicine (1).png" alt="Pharmveda Logo" class="chat-logo" />
-      <h1>Pharmveda Assistant</h1>
+      Pharmveda Assistant
     </div>
 
     <div class="chat-window" id="chat-window">
       <div class="message bot">👋 Hello! I’m your Pharmveda Assistant. How can I help you today?</div>
     </div>
 
-    <div class="chat-input-area">
-      <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off" />
-      <button id="send-btn">Send</button>
-    </div>
+    <form class="chat-input-area" id="chat-form">
+      <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off" aria-label="Chat input" />
+      <button type="submit" id="send-btn" aria-label="Send message">Send</button>
+    </form>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const chatForm = document.getElementById("chat-form");
+      const chatInput = document.getElementById("chat-input");
+      const chatWindow = document.getElementById("chat-window");
+
+      function addMessage(text, sender = "user") {
+        const message = document.createElement("div");
+        message.classList.add("message", sender);
+        message.textContent = text;
+        chatWindow.appendChild(message);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+      }
+
+      function getBotResponse(input) {
+        const cleanedInput = input.trim().toLowerCase();
+
+        if (cleanedInput.includes("fever")) {
+          return "🌿 You should take tulsi, giloye, and kada.";
+        } else if (cleanedInput.includes("cold")) {
+          return "🍯 Try ginger tea, honey, and steam inhalation.";
+        } else if (cleanedInput.includes("headache")) {
+          return "💆‍♀️ Clove oil, peppermint, or hydration may help.";
+        } else {
+          return "🤔 I'm not sure about that. Please ask about fever, cold, or headache.";
+        }
+      }
+
+      chatForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const userInput = chatInput.value;
+        if (!userInput) return;
+
+        addMessage(userInput, "user");
+        const botReply = getBotResponse(userInput);
+        setTimeout(() => addMessage(botReply, "bot"), 400);
+
+        chatInput.value = "";
+      });
+    });
+  </script>
 </body>
 </html>
