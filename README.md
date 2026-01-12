@@ -31,4 +31,5 @@ This chatbot reduces waiting time for doctors by offering instant suggestions fo
 ---
 
 > ⚠️ *Disclaimer:* This chatbot provides suggestions for informational purposes only and does not replace professional medical advice.
+<img width="856" height="799" alt="Screenshot 2025-07-08 115257 (1)" src="https://github.com/user-attachments/assets/a9ada5cb-b465-467f-a2ac-da363f9bdce2" />
 
